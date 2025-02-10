@@ -4,5 +4,5 @@ import com.example.stumato.model.User
 
 interface Repo {
     suspend fun RegisterUserManual(user: User)
-    suspend fun RegisterUser1Click(user: User)
+    suspend fun fetchUserWithoneclick(user: User)
 }

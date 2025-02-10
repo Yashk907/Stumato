@@ -5,24 +5,29 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import androidx.fragment.app.FragmentActivity
 import androidx.navigation.NavController
+import com.example.stumato.Navigation.Screen
 import com.example.stumato.Presentation.ManualRegistrationScreen.InputBox
 import com.example.stumato.Viewmodel.TrueCallerRegistrationViewmodel
 
 
 @Composable
 fun TrueCallerForm(navController: NavController,
-                   activity: FragmentActivity,
                    viewmodel: TrueCallerRegistrationViewmodel,
                    modifier: Modifier = Modifier) {
     var firstName = remember {mutableStateOf("")}
     val lastName = remember { mutableStateOf("") }
     val mobileNumber = remember { mutableStateOf("") }
+    val state = viewmodel.userProfile.collectAsState()
+
+    firstName.value=state.value?.given_name?:firstName.value
+    lastName.value=state.value?.family_name?:lastName.value
+    mobileNumber.value=state.value?.phone_number?:mobileNumber.value
 
     Column(modifier= modifier) {
         TrueCallerRegistrationButton(modifier= Modifier.fillMaxWidth(0.6f))
@@ -58,6 +63,10 @@ fun TrueCallerForm(navController: NavController,
 
         TrueCallerProceedButton(
             onProceedClick = {
+                viewmodel.fetchuser(firstName.value,
+                    lastName.value,
+                    mobileNumber.value)
+                navController.navigate(Screen.TRUECALLERDETAIL.name)
             },
             modifier= Modifier.fillMaxWidth(0.6f))
 

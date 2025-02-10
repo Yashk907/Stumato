@@ -9,13 +9,15 @@ import androidx.navigation.compose.rememberNavController
 import com.example.stumato.Presentation.DatailedScreen.DetailScreen
 import com.example.stumato.Presentation.HomeScreen.HomeScreen
 import com.example.stumato.Presentation.ManualRegistrationScreen.ManualRegistrationScreen
+import com.example.stumato.Presentation.TrueCallerDetailedScreen.TrueCallerDetailScreen
 import com.example.stumato.Presentation.TrueCallerRegistrationScreen.TrueCallerRegistrationScreen
 
 enum class Screen{
     HOMESCREEN,
     MANUALREGISTER,
     DETAILSCREEN,
-    TRUECALLERREGISTER
+    TRUECALLERREGISTER,
+    TRUECALLERDETAIL
 }
 @Composable
 fun Navigation(activity : FragmentActivity,
@@ -40,5 +42,9 @@ fun Navigation(activity : FragmentActivity,
         composable(route= Screen.TRUECALLERREGISTER.name){
             TrueCallerRegistrationScreen(activity,navController)
         }
+        composable(route= Screen.TRUECALLERDETAIL.name){
+            TrueCallerDetailScreen(navController)
+        }
+
     }
 }

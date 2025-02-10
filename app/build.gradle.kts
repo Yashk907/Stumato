@@ -42,6 +42,14 @@ android {
 }
 
 dependencies {
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+    implementation(libs.okhttp)
+    implementation(libs.logging.interceptor)
+    implementation(libs.adapter.rxjava2) // Optional if using RxJava
+    implementation(libs.kotlinx.coroutines.android) // Required for coroutines support
+
     //truecaller sdk
     implementation(libs.truecaller.sdk)
     // ViewModel for Jetpack Compose
