@@ -1,29 +1,34 @@
 package com.example.stumato
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.fragment.app.FragmentActivity
 import com.example.stumato.Navigation.Navigation
-import com.example.stumato.Presentation.ManualRegistrationScreen
 import com.example.stumato.ui.theme.StumatoTheme
+import com.truecaller.android.sdk.oAuth.TcSdk
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class MainActivity : ComponentActivity() {
+class MainActivity : FragmentActivity() {
+    override fun onActivityResult(
+        requestCode: Int,
+        resultCode: Int,
+        data: Intent?,
+
+    ) {
+        super.onActivityResult(requestCode, resultCode, data)
+        // Pass the result to Truecaller SDK
+        TcSdk.getInstance().onActivityResultObtained(this, requestCode, resultCode, data)
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             StumatoTheme {
-                Navigation()
+                val activity = this
+                Navigation(activity)
             }
         }
     }

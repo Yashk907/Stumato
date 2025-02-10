@@ -2,13 +2,14 @@ package com.example.stumato.Navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.navigation.Navigation
+import androidx.fragment.app.FragmentActivity
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.stumato.Presentation.DetailScreen
-import com.example.stumato.Presentation.HomeScreen
-import com.example.stumato.Presentation.ManualRegistrationScreen
+import com.example.stumato.Presentation.DatailedScreen.DetailScreen
+import com.example.stumato.Presentation.HomeScreen.HomeScreen
+import com.example.stumato.Presentation.ManualRegistrationScreen.ManualRegistrationScreen
+import com.example.stumato.Presentation.TrueCallerRegistrationScreen.TrueCallerRegistrationScreen
 
 enum class Screen{
     HOMESCREEN,
@@ -17,7 +18,8 @@ enum class Screen{
     TRUECALLERREGISTER
 }
 @Composable
-fun Navigation(modifier: Modifier = Modifier) {
+fun Navigation(activity : FragmentActivity,
+               modifier: Modifier = Modifier) {
     val navController = rememberNavController()
 
     NavHost(navController = navController,
@@ -36,7 +38,7 @@ fun Navigation(modifier: Modifier = Modifier) {
         }
 
         composable(route= Screen.TRUECALLERREGISTER.name){
-            //code
+            TrueCallerRegistrationScreen(activity,navController)
         }
     }
 }

@@ -20,19 +20,4 @@ class RepoImp : Repo {
        //coding
     }
 
-    //trueCallerLogic
-    private val tcOAuthCallback = object  : TcOAuthCallback{
-        override fun onFailure(tcOAuthError: TcOAuthError) {
-            _user.value= User()
-        }
-
-        override fun onSuccess(tcOAuthData: TcOAuthData) {
-            Log.d("yash",tcOAuthData.scopesGranted.toString())
-        }
-
-        override fun onVerificationRequired(tcOAuthError: TcOAuthError?) {
-            TODO("Not yet implemented")
-        }
-
-    }
 }
